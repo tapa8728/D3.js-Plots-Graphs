@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A Basic Pie Chart</title>
+    <link rel="stylesheet" href="normalize.css">
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <script>
+      (function(d3) {
+        'use strict';
+
+        /*
+          In D3, each method is specific: it does one thing and it does that one thing very well. This allows it to be highly composable, which is the origin of its flexibility, and that, in turn, is the source of its power.
+        */
+
+        /* We'll start by defining some data. Later on we'll load in a more realistic dataset but for now let's just create a simple array with four objects, each of which has a label and a count: */
+        var dataset = [
+          { label: 'abc', count: 10 },
+           {label: 'exd', count: 10 },
+            {label: 'Abulia', count: 10 }, 
+          { label: 'Betelgeuse', count: 20 },
+          { label: 'Cantaloupe', count: 30 },
+          { label: 'Dijkstra', count: 40 }
+        ];
+
+        //Dimensions for the chart; we have the radius coz its a pie chart
+        var width = 360;
+        var height = 360;
+        var radius = Math.min(width, height) / 2;
+
+        // D3 defines color scales for us: 20 colors in this case. 
+        // More can be found here: https://github.com/mbostock/d3/wiki/Ordinal-Scales#categorical-colors
+        var color = d3.scale.category20c();
+
+        /*  Create "svg" and "g" element
+          - First we use D3's select method to retrieve the DOM element with id chart. 
+          - Next we append an "svg" element to the element we've selected. (define its type)
+          - Because we're chainingthese calls, we now have a reference to the new svg element, so we can set its width & height.
+          - Now we append a "g" element to the svg element.
+          - Finally, because our reference is now to the g element, we center it in the containing svg element.
+        */
+        var svg = d3.select('#chart')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height)
+          .append('g')
+          .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
+
+        // Now we get to the actual pie chart itself
+        var arc = d3.svg.arc()
+          .outerRadius(radius);
+
+        // return the number of elements in the dataset 
+        // sort is null because we dont the sorting
+        var pie = d3.layout.pie()
+          .value(function(d) { return d.count; })
+          .sort(null);
+
+        /* Final Step of creating the chart
+          - First we select all path elements inside our svg (or more specifically, inside the g element). At present these don't exist but we're going to create them.
+          - The data() method is how we associate our dataset with the path elements we're about to create. We do so by passing it through our pie function, which knows how to extract the values and give them meaning in the context of a pie chart.
+          - The enter() method creates placeholder nodes for each of the values in our dataset.
+          - Next we use append() to replace our placeholders with path elements.
+          - We define the d attribute—the complicated one in the markup—using our arc function.
+          - Finally we make use of our colour scale to define the fill for each path by associating a colour with each label in the dataset.
+        */
+        var path = svg.selectAll('path')
+          .data(pie(dataset))
+          .enter()
+          .append('path')
+          .attr('d', arc)
+          .attr('fill', function(d, i) { 
+            return color(d.data.label);
+          });
+
+      })(window.d3);
+    </script>
+  </body>
+</html>

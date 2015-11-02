@@ -1,0 +1,54 @@
+<!--Use the HTML template for D3.js code -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<style></style>
+</head>
+<body>
+	<div class="text-center"> <h1> US Chloropleth </h1> </div>
+	<script type="text/JavaScript">
+
+	/* D3 code here */
+	// 1- Create an SVG element
+	var w = 1000;
+	var h = 500;
+	var svg = d3.select("body").append("svg")
+	.attr("width", w)
+	.attr("height", h);
+	/* 
+		2- Specify a projection and a path generator
+		d3.geo.path() is our path generator, and will create a path based on a bounded geometry object, which contains the coordinates of the boundaries for each state/county.
+		By default, d3.geo.path() uses the albersUsa projection, so “.projection(projection)” is not necessary. However, you can change “d3.geo.albersUsa()” to any of the common map projections listed 
+	*/
+	var projection = d3.geo.albersUsa()
+	var path = d3.geo.path()
+		.projection(projection);
+	/*
+		Add code to look inside your us-topo.json file. To do this, we need to add this to our html file, beneath our svg element(after you have defined the SVG element)
+	*/	 
+	d3.json("us-topo.json", function(us) {
+		console.log(us);
+		/*
+			Bind geometery objects to paths. In order to use our path variable, we will need to convert our TopoJSON file back to GeoJSON using topojson.feature(). 
+			When working with a GeoJSON file (like in your deliberate practice), all you need is .data(us.features)
+			This is the funation which will actually DRAW your map. 
+		*/
+		svg.selectAll("append")
+		// .data(topojson.feature(us, us.objects.counties).features)	-- For US Counties
+		.data(topojson.feature(us, us.objects.states).features)
+		.enter()
+		.append("path")	//we defined path earlier
+		.attr("d", path); 
+		/*
+			SVG paths are defined by one attribute, “d”, which dictates how we want to draw a line from one point in our data to another, essentially how we want to shape our data, using a series of commands. 
+			Our “path” variable simplifies things for us. The path variable determines the shape of our data based on the type of geometry object it is. 
+		*/
+	});
+	</script>
+</body>
+</html>

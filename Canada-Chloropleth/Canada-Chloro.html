@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<!-- Latest compiled and minified Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<style></style>
+</head>
+<body>
+	<div class="text-center"> <h1> Canada Chloropleth </h1> </div>
+	<script type="text/javascript"> 
+	/*
+		D3.js Code goes here
+		1. Define svg element
+	*/
+	var width = 1000;
+	var height = 500;
+	var svg = d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height);
+
+	/*
+		Define the projection & the path
+	*/
+	var projection = d3.geo.azimuthalEqualArea()
+		.rotate([100, -45])
+		.center([5, 20])
+		.scale(800)
+		.translate([width/2, height/2]);
+	var path = d3.geo.path().projection(projection);
+
+	/*
+		Look inside your topoJSON file to draw the path
+	*/
+	d3.json("canadatopo.json", function(canada){
+		console.log(canada);
+		svg.selectAll("append")
+		//data(topojson.feature(canada, canada.objects.provinces).features)
+		.data(topojson.feature(canada, canada.objects.provinces).features)
+		.enter()
+		.append("path")
+		.attr("d", path);
+	});
+	</script>
+</body>
+</html>

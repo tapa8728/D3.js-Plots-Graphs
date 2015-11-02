@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Syria</title>
+    <link data-require="normalize@*" data-semver="3.0.1" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css" />
+    <style>
+      .legend {
+        font-size: 12px;
+      }
+      rect {
+        stroke-width: 2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div> 
+    <h1> Lets look at Syria Chloropleth </h1>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"  data-semver="3.4.6" data-require="d3@*"></script>
+    <script>
+        // Size of the canvas on which the map will be rendered
+        var width = 1000,
+            height = 1100,
+
+            // SVG element as a JavaScript object that we can manipulate later
+            svg = d3.select("#map").append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+        // Normally you'd look this up. This point is in the middle of Syria
+        var center = [38.996815, 34.802075];
+
+        // Instantiate the projection object
+        var projection = d3.geo.conicConformal()  
+            .center(center)
+            .clipAngle(180)
+            // Size of the map itself, you may want to play around with this in 
+            // relation to your canvas size
+            .scale(10000)
+            // Center the map in the middle of the canvas
+            .translate([width / 2, height / 2])
+            .precision(.1);     
+        // Assign the projection to a path
+        var path = d3.geo.path().projection(projection);  
+
+        d3.json("cities.json", function(err, data) {  
+        $.each(data.features, function(i, feature) {
+          svg.append("path")
+            .datum(feature.geometry)
+            .attr("class", "border");
+        });
+      });
+
+      
+    </script>
+  </body>
+
+</html>

@@ -38,7 +38,7 @@
 		console.log(canada);
 		svg.selectAll("append")
 		//data(topojson.feature(canada, canada.objects.provinces).features)
-		.data(topojson.feature(canada, canada.objects.provinces).features)
+		.data(topojson.feature(canada, canada.objects).features)
 		.enter()
 		.append("path")
 		.attr("d", path);

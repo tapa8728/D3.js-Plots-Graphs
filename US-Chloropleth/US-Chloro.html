@@ -8,7 +8,13 @@
 	<script src="http://d3js.org/queue.v1.min.js"></script>		<!-- Queue the  .csv, .json files-->
 	<!-- Latest compiled and minified Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-	<style></style>
+	<style>
+	.states{
+	  stroke: red;
+	  stroke-linejoin: round;
+
+	}
+	</style>
 </head>
 <body>
 	<div class="text-center"> <h1> US Chloropleth </h1> </div>
@@ -56,7 +62,8 @@
 		.enter()
 		.append("path")	//we defined path earlier
 		.attr("d", path)
-		.attr("fill", function(d, i) { return colour(i); });; 
+		.attr("class", "states")
+		.attr("fill", function(d, i) { return colour(i); });
 		/*
 			SVG paths are defined by one attribute, “d”, which dictates how we want to draw a line from one point in our data to another, essentially how we want to shape our data, using a series of commands. 
 			Our “path” variable simplifies things for us. The path variable determines the shape of our data based on the type of geometry object it is. 

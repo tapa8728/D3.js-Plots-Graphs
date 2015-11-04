@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+.chart div {
+  font: 10px sans-serif;
+  background-color: red;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+  }
+</style></head>
+<body>
+	<div class="chart"></div>
+	<script src="//d3js.org/d3.v3.min.js"></script>
+	<script>
+	/* D3.js Code here */
+		//define the dataset
+		var dataset = [5, 7,31,6, 16, 43, 2, 15, 27, 45];
+
+		//define the scale -  mapping of ddata points to pixels on the screen
+		//since we want it against the x-axis, we will define a scale for x
+		var x = d3.scale.linear()		//D3 method chaining
+				.domain([0, d3.max(dataset)])		//Data Points	
+				.range([0, 500]);					//pixel mapping
+
+		//where do we want this chart rendered?
+		d3.selectAll(".chart").selectAll("div")
+			.data(dataset)
+			.enter()
+			.append("div")	//each bar should be a new div
+			.style("width", function(d){ return x(d)+"px";})	//define the style of the div
+			.text(function(d){ return d;});	//Define the text on the div
+
+	</script>
+</body>
+</html>

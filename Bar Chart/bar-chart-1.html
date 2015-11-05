@@ -22,17 +22,17 @@
 
 		//define the scale -  mapping of ddata points to pixels on the screen
 		//since we want it against the x-axis, we will define a scale for x
-		var x = d3.scale.linear()		//D3 method chaining
+		var y = d3.scale.linear()		//D3 method chaining
 				.domain([0, d3.max(dataset)])		//Data Points	
-				.range([0, 500]);					//pixel mapping
+				.range([0, 90]);					//pixel mapping
 
 		//where do we want this chart rendered?
 		d3.selectAll(".chart").selectAll("div")
 			.data(dataset)
 			.enter()
 			.append("div")	//each bar should be a new div
-			.style("width", function(d){ return x(d)+"px";})	//define the style of the div
-			.text(function(d){ return d;});	//Define the text on the div
+			.style("height", function(d){ return y(d)+"px";})	//define the style of the div
+			.text(function(d){ return "Digits -"+d;});	//Define the text on the div
 
 	</script>
 </body>

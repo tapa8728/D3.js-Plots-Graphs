@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+</style>
+<svg class="chart"></svg>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+var width = 960;
+var height = 500;
+
+//we need to define the y scale because we want a vertical chart
+/*
+	(0)			  (width)
+	-------------> X
+	|(height)
+	|
+	|
+	|
+	Y (0)
+
+Hence y axis will need to have a lipped domain-range pair as compared to x-axis
+*/
+
+var y = d3.scale.linear()
+		.range([height, 0]);	//pixel mapping: 500,0: because we want 0 to be positioned at the bottom of the page
+		//.domain([0, 360])
+
+
+</script>

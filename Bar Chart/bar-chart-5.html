@@ -31,11 +31,17 @@ var y = d3.scale.linear()
 		.range([height, 0]);
 
 //We use a "g" element to offset the origin of the chart area by the top-left margin.
+//Any elements subsequently added to chart will thus inherit the margins.
 var chart = d3.select(".chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//Define the X-axis
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
 
 d3.tsv("bar-data-5.txt", type, function(error, data){
 	//Set the domain values for both axes

@@ -6,5 +6,8 @@ Frank	98
 Kahini	66
 Siva	19
 Varshini	21
+Anita	51
+Geeta	81
+Harshini	66
 Kavya	32
 Sanddie	88

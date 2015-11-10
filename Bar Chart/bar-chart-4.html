@@ -2,22 +2,101 @@
 <meta charset="utf-8">
 <style>
 
-.chart rect {
-  fill: steelblue;
+.chart {
+  position: relative;
+  /*margin-left: 160px;*/
 }
+
+.table-nonfluid {
+   width: auto !important;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.chart rect {
+  fill: orange;
+ }
 
 .chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: middle;
+  fill: black;
+  font: bold 12px  sans-serif;
+  text-anchor: end;
 }
-
 </style>
-<svg class="chart"></svg>
-<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<center><h1>Vertical Bar Chart </h1>
+<h3> External Data File(.csv/.tsv)</h3></center>
+<center><svg class="chart"></svg>
+<h2>bar-data.tsv</h2></center>
+<br>
+<div class="container">
+  <table class="table table-hover table-nonfluid" align="center">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tanvi</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>Reema</td>
+        <td>58</td>
+      </tr>
+      <tr>
+        <td>Piyush</td>
+        <td>75</td>
+      </tr>
+      <tr class="danger">
+        <td>Frank</td>
+        <td>98</td>
+      </tr>
+      <tr>
+        <td>Kahini</td>
+        <td>66</td>
+      </tr>
+      <tr>
+        <td>Siva</td>
+        <td>19</td>
+      </tr>
+      <tr>
+        <td>Varshini</td>
+        <td>21</td>
+      </tr>
+      <tr>
+        <td>Anita</td>
+        <td>51</td>
+      </tr>
+      <tr>
+        <td>Sangeeta</td>
+        <td>81</td>
+      </tr>
+      <tr>
+        <td>Harshini</td>
+        <td>101</td>
+      </tr>
+      <tr class="danger">
+        <td>Kavya</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>Sanddie</td>
+        <td>88</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script>
 var width = 960;
-var height = 500;
+var height = 450;
 
 //we need to define the y scale because we want a vertical chart
 /*
@@ -58,12 +137,26 @@ d3.tsv("bar-data.txt", type, function(error, data){
 	bar.append("rect")
 		.attr("width", barWidth-1)
 		.attr("height", function(d){ return height-y(d.value)})
-		.attr("y", function(d) { return y(d.value); });
+		.attr("y", function(d) { return y(d.value); })
+		.style("fill", function(d){
+        if(d.value > 80){
+            return "9933CC";
+          }
+          else if(d.value < 30)
+            return "FF6666";
+        
+      });
 
 	bar.append("text")
-      .attr("x", barWidth / 2)
+      .attr("x", barWidth / 2 +12)
       .attr("y", function(d) { return y(d.value) + 3; })
-      .attr("dy", ".75em")
+      .attr("dy", "1.75em")
+      .text(function(d) { return d.name; });
+
+    bar.append("text")
+      .attr("x", barWidth / 2 +12)
+      .attr("y", function(d) { return y(d.value) + 3; })
+      .attr("dy", "-.75em")
       .text(function(d) { return d.value; });
 });
 

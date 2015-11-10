@@ -120,7 +120,9 @@ d3.tsv("bar-data.txt", type, function(error, data) {
       .attr("dy", ".35em")
       .text(function(d) { return d.name+ " - "+d.value+"   "; });
 });
-
+/*
+Type conversion isn’t strictly required, but it’s an awfully good idea. By default, all columns in TSV and CSV files are strings. If you forget to convert strings to numbers, then JavaScript may not do what you expect, say returning "12" for "1" + "2" rather than 3. Similarly, if you sort strings rather than numbers, the lexicographic behavior of d3.max may surprise you!
+*/
 function type(d) {
   d.value = +d.value; // coerce to number
   return d;

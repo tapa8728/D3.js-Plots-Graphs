@@ -7,9 +7,20 @@
 }
 
 .chart text {
-  fill: white;
+  fill: black;
   font: 10px sans-serif;
   text-anchor: middle;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
 </style>
@@ -37,38 +48,43 @@ var chart = d3.select(".chart")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 //Define the X-axis
 var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
+//define the y-axis
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
 d3.tsv("bar-data-5.txt", type, function(error, data){
 	//Set the domain values for both axes
 	console.log(data);
 	x.domain(data.map(function(d) { return d.name; }));
-  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+	  y.domain([0, d3.max(data, function(d) { return d.value; })]);
 
-  var bar = chart.selectAll("g")
-      .data(data)
-    .enter().append("g")
-      .attr("transform", function(d) { return "translate(" + x(d.name) + ",0)"; });
+	  chart.append("g")
+	      .attr("class", "x axis")
+	      .attr("transform", "translate(0," + height + ")")
+	      .call(xAxis);
 
-  bar.append("rect")
-      .attr("y", function(d) { return y(d.value); })
-      .attr("height", function(d) { return height - y(d.value); })
-      .attr("width", x.rangeBand());
+	  chart.append("g")
+	      .attr("class", "y axis")
+	      .call(yAxis);
 
-  bar.append("text")
-      .attr("x", x.rangeBand() / 2)
-      .attr("y", function(d) { return y(d.value) + 3; })
-      .attr("dy", ".75em")
-      .text(function(d) { return d.value; });
-});
+	  chart.selectAll(".bar")
+	      .data(data)
+	    .enter().append("rect")
+	      .attr("class", "bar")
+	      .attr("x", function(d) { return x(d.name); })
+	      .attr("y", function(d) { return y(d.value); })
+	      .attr("height", function(d) { return height - y(d.value); })
+	      .attr("width", x.rangeBand());
+	});
 
-function type(d) {
-  d.value = +d.value; // coerce to number
-  return d;
-}
+	function type(d) {
+	  d.value = +d.value; // coerce to number
+	  return d;
+	}
 
-</script>
+	</script>

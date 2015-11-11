@@ -19,9 +19,9 @@
             scope: 'usa',
             element: document.getElementById('container1'),
             geographyConfig: {
+                   
               popupTemplate: function(geo, data) {
-                return data && data.info && "<div class='hoverinfo'><strong>" + data.info + "</strong></div>";
-              },
+                      return data && data.info && "<div class='hoverinfo'><strong>" + data.info + "</strong></div>";
               highlightOnHover: true,
               borderColor: '#444',
               borderWidth: 0.5

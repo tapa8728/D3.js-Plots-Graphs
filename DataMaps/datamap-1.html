@@ -4,20 +4,18 @@
 <html>
     <head>
       <style>
-        .datamaps-legend dt, .datamaps-legend dd {
-            float: none;
+        /*.datamaps-legend dt, .datamaps-legend dd {
+           float: none;
         }
         .datamaps-legend {
-            right: -50px;
+            right: 50px;
             top: 100px;
-        }
+        }*/
       </style>
     </head>
     <body>
-        <h1>US MAP Choropleth with statewise-data</h1>
-        <div id="container1" style="height: 500px; width: 960px"></div>
-        <h2>Legend</h2>
-        
+        <center><h1>US MAP Choropleth with statewise-data</h1></center>
+        <div id="container1" style="height: 450px; width: 960px"></div>
         <!-- D3.js -->
         <script src="//d3js.org/d3.v3.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -33,12 +31,14 @@
                   element: document.getElementById('container1'),
                   responsive: true,
                   geographyConfig: {
-                    popupTemplate: function(geo, data) {
-                      return data && data.electoralVotes && "<div class='hoverinfo'><strong>" + data.electoralVotes + "</strong></div>";
+                    
+                   popupTemplate: function(geo, data) {
+                return data && data.electoralVotes && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong>:"+data.electoralVotes+"</div>";
                     },
+
                     highlightOnHover: true,
                     borderColor: '#444',
-                    borderWidth: 0.5
+                    borderWidth: 0.9
                   },
                   dataUrl: 'electoral-states.json',
                   dataType: 'json',
@@ -55,7 +55,18 @@
                 }); //end of Datamap variable
                   
               //draw a legend for this map
-             map.legend();
+             map.legend({
+              legendTitle : "Electoral Votes Across usa",
+              defaultFillName: "No data",
+              labels: {
+                'REP': "Republican",   //republic - maize
+                'DEM': "Democratic",   //democratic - Blue
+                'HEAVY_DEM': "High Rep",
+                'LIGHT_DEM': "Low Rep",
+                'HEAVY_REP': "High Rep",
+                'LIGHT_REP': "Low Rep"
+              },
+            });
         </script>
     </body>
 </html>

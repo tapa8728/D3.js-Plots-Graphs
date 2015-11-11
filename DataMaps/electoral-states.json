@@ -40,11 +40,11 @@
         "electoralVotes": 11
     },
     "KS": {
-        "fillKey": "REP",
+        "fillKey": "IIGHT_REP",
         "electoralVotes": 32
     },
     "KY": {
-        "fillKey": "REP",
+        "fillKey": "HEAVY_REP",
         "electoralVotes": 32
     },
     "LA": {
@@ -56,11 +56,11 @@
         "electoralVotes": 32
     },
     "ME": {
-        "fillKey": "DEM",
+        "fillKey": "LIGHT_DEM",
         "electoralVotes": 32
     },
     "MA": {
-        "fillKey": "DEM",
+        "fillKey": "HEAVY_DEM",
         "electoralVotes": 32
     },
     "MN": {
@@ -68,7 +68,7 @@
         "electoralVotes": 32
     },
     "MI": {
-        "fillKey": "DEM",
+        "fillKey": "LIGHT_DEM",
         "electoralVotes": 32
     },
     "MS": {
@@ -120,7 +120,7 @@
         "electoralVotes": 32
     },
     "OK": {
-        "fillKey": "REP",
+        "fillKey": "LIGHT_REP",
         "electoralVotes": 32
     },
     "OR": {

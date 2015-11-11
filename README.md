@@ -10,7 +10,10 @@ link -  www.tanviparikh.com/portfolios/interactive_donut/all_correct_answers_ani
 ### Choropleth USA State Map - 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/Usa1.png "Choropleth USA")
 
-### Simple Bar Chart - 
+### Choropleth USA from external data - 
+![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/datamap1.png "Choropleth USA")
+
+### Basic Bar Chart - 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/barchart1.png "Simple Bar 1")
 
 ### Bar Chart developed from external data - 

@@ -3,7 +3,8 @@
 <style>
 
 .chart rect {
-  fill: steelblue;
+  fill: #990099;
+
 }
 
 .chart text {
@@ -23,12 +24,52 @@
   shape-rendering: crispEdges;
 }
 
+/*Add hover to bar*/
+.bar:hover {
+  fill: #99CCFF;
+  border: 5px solid red;
+}
+ /*Style the tooltip*/
+.d3-tip {
+  line-height: 1;
+  font: 12px sans-serif;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font: 12px sans-serif;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
 </style>
 <center><h1>Interactive Bar Chart</h1>
 <h3>External Data File(.csv/.tsv)</h3></center>
 <center><svg class="chart"></svg>
-<h2>bar-data.tsv</h2></center>
+<p>Hover on the bars for data</p></center>
 <script src="//d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>	<!-- For the tooltip-->
+<!-- For bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script>
 // We need to add the margins to accomodate the axes of eiither side of the chart
 var margin = {top: 20, right: 30, bottom: 30, left: 40},
@@ -41,6 +82,14 @@ var x = d3.scale.ordinal()
 var y = d3.scale.linear()
 		.range([height, 0]);
 
+//Define the tooltip
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong>Frequency: <span style='color:orange'>" + d.value + "</strong></span>";
+  })
+
 //We use a "g" element to offset the origin of the chart area by the top-left margin.
 //Any elements subsequently added to chart will thus inherit the margins.
 var chart = d3.select(".chart")
@@ -48,6 +97,10 @@ var chart = d3.select(".chart")
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+//call the tooltip on the chart
+chart.call(tip);
+
 //Define the X-axis
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -90,7 +143,9 @@ d3.tsv("bar-data-5.txt", type, function(error, data){
 	      .attr("x", function(d) { return x(d.name); })
 	      .attr("y", function(d) { return y(d.value); })
 	      .attr("height", function(d) { return height - y(d.value); })
-	      .attr("width", x.rangeBand());
+	      .attr("width", x.rangeBand())
+	      .on('mouseover', tip.show)
+      	  .on('mouseout', tip.hide);
 	});
 
 	function type(d) {

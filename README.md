@@ -18,3 +18,7 @@ link -  www.tanviparikh.com/portfolios/interactive_donut/all_correct_answers_ani
 
 ### Vertical Bar Chart developed from external data - 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/barchart4.png "Simple Bar 3")
+
+### Interactive Bar Chart -
+#### Letter Frequency mapping 
+![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/barchart5.png "Simple Bar 3")

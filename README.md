@@ -3,7 +3,7 @@ My learnings of D3.js, Dimple.js and NVD3 along with creative colorful charts
 
 
 ### Interactive Donut Chart:
-link -  www.tanviparikh.com/portfolios/interactive_donut/all_correct_answers_animated.html 
+link -  http://www.tanviparikh.com/portfolios/interactive_donut/all_correct_answers_animated.html 
 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/donut.png "Interactive Donut")
 
@@ -11,6 +11,7 @@ link -  www.tanviparikh.com/portfolios/interactive_donut/all_correct_answers_ani
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/Usa1.png "Choropleth USA")
 
 ### Choropleth USA from external data - 
+link - http://tanviparikh.com/portfolios/datamaps/datamap-3.html 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/datamap1.png "Choropleth USA")
 
 ### Basic Bar Chart - 

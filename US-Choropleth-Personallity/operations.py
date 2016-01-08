@@ -1,17 +1,24 @@
-#operations on the personality data
+""" Operations on the personality data to convert it to a JSON file of format
+	{
+	  "NY": {"fillKey": "Visited", "anotherProperty": "Born here"},
+	  "TX": {"fillKey": "Visited", "anotherProperty": "Live here"},
+	  "CA": {"fillKey": "Visited", "anotherProperty": "Here while writing this code"}
+	}"""
+
 import json
 def dump(a):
-        return {'gfgid': a[0],'location': a[1],"personality": {'openness': a[7],
-                               									'conscientiousness': a[8],
-								                               'extraversion': a[9],
-								                               'agreeableness': a[10],
-								                               'neuroticism': a[11]}}
+        return {a[1]: { 'gfgid': a[0],
+        				"openness": a[7], 
+        				'conscientiousness': a[8],
+						'extraversion': a[9],
+						'agreeableness': a[10],
+						'neuroticism': a[11]}}
 		     
 
 
 # Raw data in comma-separated format
 f = open("data.txt","r") 	#opens file with name of "data.txt"
-fo = open("data_1.txt", "w") #'w' mode will create a new file in the directory
+fo = open("data_1.json", "w") #'w' mode will create a new file in the directory
 
 lines = f.readlines()
 mylist= []
@@ -29,6 +36,7 @@ for l in lines:
 	#Step 2: Apply formula for Openness		
 	tmp2=int(tmp1[2])+int(tmp1[3])+int(tmp1[4])
 	tmp1[7] = tmp2
+
 	json_str = dump(tmp1)
 	print json_str
 	mylist.append(json_str)

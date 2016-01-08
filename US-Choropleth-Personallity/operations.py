@@ -6,6 +6,7 @@ def dump(a):
 								                               'extraversion': a[9],
 								                               'agreeableness': a[10],
 								                               'neuroticism': a[11]}}
+		     
 
 
 # Raw data in comma-separated format
@@ -13,6 +14,7 @@ f = open("data.txt","r") 	#opens file with name of "data.txt"
 fo = open("data_1.txt", "w") #'w' mode will create a new file in the directory
 
 lines = f.readlines()
+mylist= []
 
 # Step 1: Clean up data by removing spaces between each value
 for l in lines:
@@ -27,11 +29,14 @@ for l in lines:
 	#Step 2: Apply formula for Openness		
 	tmp2=int(tmp1[2])+int(tmp1[3])+int(tmp1[4])
 	tmp1[7] = tmp2
-	print tmp1
 	json_str = dump(tmp1)
 	print json_str
-	fo.write(json.dumps(json_str))
+	mylist.append(json_str)
+	
+
+print mylist
+fo.write(json.dumps(mylist))
 print"----------------------"
 print"lets read from ouput file"
-f2 = open("data_1.txt", "r")
-print f2.readlines()
+# f2 = open("data_1.txt", "r")
+# print f2.readlines()

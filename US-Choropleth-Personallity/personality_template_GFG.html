@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Personality US MAP</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 50px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    .datamaps-legend {
+            position: relative;
+            top: 710px;
+        }
+    #container1 {
+          position: relative;
+          left: 150px;
+        }
+    
+
+    </style>
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <!-- Map Generating Function -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://datamaps.github.io/scripts/datamaps.usa.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">GFG </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#open">Openness</a>
+                    </li>
+                    <li>
+                        <a href="#conc">Conscientiousness</a>
+                    </li>
+                    <li>
+                        <a href="#extra">Extraversion</a>
+                    </li>
+                    <li>
+                        <a href="#agree">Agreeableness</a>
+                    </li>
+                    <li>
+                        <a href="#neuro">Neuroticism</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header -->
+    <section id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1>USA Personality Distribution</h1>
+                    <h4>Hover on map for state-wise information</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Content -->
+    <section id = "open">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Openness Personality Trait</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <script>
+                    var map = new Datamap({
+                      scope: 'usa',
+                      element: document.getElementById('container1'),
+                      responsive: true,
+                      geographyConfig: {
+                          popupTemplate: function(geo, data) {
+                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                        },
+                        highlightFillColor: '#FF6600',
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 1.1
+                      },
+                      dataUrl: 'data_1.json',
+                      dataType: 'json',
+                      data: {},
+                      fills: {
+                        'REP': '#000f1e',   //republic - maize
+                        'DEM': '#667d93',   //democratic - Blue
+                        defaultFill: 'grey'
+                      }
+                    }); //end of Datamap variable
+                      
+                  //draw a legend for this map
+                 map.legend({
+                  legendTitle : "Openness Personality Trait",
+                  defaultFillName: "No data",
+                  labels: {
+                    'REP': "Low Value",   //republic - maize
+                    'DEM': "High Value",   //democratic - Blue
+                  },
+                });
+        </script>
+    </section>
+    <br><br><br><br>
+
+    <!-- Conc Content -->
+    <section id = "conc">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Conscientiousness Personality Trait</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <script>
+                
+                  var map = new Datamap({
+                      scope: 'usa',
+                      element: document.getElementById('container1'),
+                      responsive: true,
+                      geographyConfig: {
+                          popupTemplate: function(geo, data) {
+                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                        },
+                        highlightFillColor: '#FF6600',
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 1.1
+                      },
+                      dataUrl: 'data_1.json',
+                      dataType: 'json',
+                      data: {},
+                      fills: {
+                        'REP': '#000f1e',   //republic - maize
+                        'DEM': '#667d93',   //democratic - Blue
+                        defaultFill: 'grey'
+                      }
+                    }); //end of Datamap variable
+                      
+                  //draw a legend for this map
+                 map.legend({
+
+                  legendTitle : "Electoral Votes Across usa",
+                  defaultFillName: "No data",
+                  labels: {
+                    'REP': "Low Value",   //republic - maize
+                    'DEM': "High Value",   //democratic - Blue
+                  },
+                });
+        </script>
+    </section>
+
+    <!-- Extra Content -->
+    <section id = "extra">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Extraversion Personality Trait</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <script>
+                var p_type;
+                  var map = new Datamap({
+                      scope: 'usa',
+                      element: document.getElementById('container1'),
+                      responsive: true,
+                      geographyConfig: {
+                          popupTemplate: function(geo, data) {
+                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                        },
+                        highlightFillColor: '#FF6600',
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 1.1
+                      },
+                      dataUrl: 'data_1.json',
+                      dataType: 'json',
+                      data: {},
+                      fills: {
+                        'REP': '#000f1e',   //republic - maize
+                        'DEM': '#667d93',   //democratic - Blue
+                        defaultFill: 'grey'
+                      }
+                    }); //end of Datamap variable
+                      
+                  //draw a legend for this map
+                 map.legend({
+
+                  legendTitle : "Electoral Votes Across usa",
+                  defaultFillName: "No data",
+                  labels: {
+                    'REP': "Low Value",   //republic - maize
+                    'DEM': "High Value",   //democratic - Blue
+                  },
+                });
+        </script>
+    </section>
+
+    <!-- agree Content -->
+    <section id = "agree">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Agreeableness Personality Trait</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <script>
+                var p_type;
+                  var map = new Datamap({
+                      scope: 'usa',
+                      element: document.getElementById('container1'),
+                      responsive: true,
+                      geographyConfig: {
+                          popupTemplate: function(geo, data) {
+                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                        },
+                        highlightFillColor: '#FF6600',
+                        highlightOnHover: true,
+                        borderColor: '#444',
+                        borderWidth: 1.1
+                      },
+                      dataUrl: 'data_1.json',
+                      dataType: 'json',
+                      data: {},
+                      fills: {
+                        'REP': '#000f1e',   //republic - maize
+                        'DEM': '#667d93',   //democratic - Blue
+                        defaultFill: 'grey'
+                      }
+                    }); //end of Datamap variable
+                      
+                  //draw a legend for this map
+                 map.legend({
+
+                  legendTitle : "Electoral Votes Across usa",
+                  defaultFillName: "No data",
+                  labels: {
+                    'REP': "Low Value",   //republic - maize
+                    'DEM': "High Value",   //democratic - Blue
+                  },
+                });
+        </script>
+    </section>
+
+    <!-- neuro Content -->
+    <section id = "neuro">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Neuroticism Personality Trait</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+        <script>
+                var map = new Datamap({
+                  scope: 'usa',
+                  element: document.getElementById('container1'),
+                  responsive: true,
+                  geographyConfig: {
+                      popupTemplate: function(geo, data) {
+                      return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                    },
+                    highlightFillColor: '#FF6600',
+                    highlightOnHover: true,
+                    borderColor: '#444',
+                    borderWidth: 1.1
+                  },
+                  dataUrl: 'data_1.json',
+                  dataType: 'json',
+                  data: {},
+                  fills: {
+                    'REP': '#000f1e',   //republic - maize
+                    'DEM': '#667d93',   //democratic - Blue
+                    defaultFill: 'grey'
+                  }
+                }); //end of Datamap variable
+                  
+              //draw a legend for this map
+             map.legend({
+
+              legendTitle : "Electoral Votes Across usa",
+              defaultFillName: "No data",
+              labels: {
+                'REP': "Low Value",   //republic - maize
+                'DEM': "High Value",   //democratic - Blue
+              },
+            });
+        </script>
+    </section>
+
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

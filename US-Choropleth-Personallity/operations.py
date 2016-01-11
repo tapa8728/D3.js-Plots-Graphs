@@ -57,8 +57,9 @@ def color(v):
 
 
 # Function to format the data in required format
-def dump(idk, loc, a):
-	result = '"'+loc+'" : {"id": '+ str(idk) +', "openness" : '+ str(a[0])+',"fillKey" : "'+color(a[0])+'","conscientiousness" : '+str(a[1])+',"fillKey" : "'+color(a[1])+'","extraversion": '+str(a[2])+',"fillKey" : "'+color(a[2])+'","agreeableness" : '+str(a[3])+',"fillKey" : "'+color(a[3])+'","neuroticism" : '+str(a[4])+',"fillKey" : "'+color(a[4])+'"}'
+def dump(idk, loc, a, orig):
+	c = idk-1;
+	result = '"'+loc+'" : {"id": '+ str(idk) +', "openness" : '+ str(orig[c][0])+',"fillKey" : "'+color(a[0])+'","conscientiousness" : '+str(orig[c][1])+',"fillKey" : "'+color(a[1])+'","extraversion": '+str(orig[c][2])+',"fillKey" : "'+color(a[2])+'","agreeableness" : '+str(orig[c][3])+',"fillKey" : "'+color(a[3])+'","neuroticism" : '+str(orig[c][4])+',"fillKey" : "'+color(a[4])+'"}'
 	return result
 
 # Raw data in comma-separated format
@@ -68,7 +69,9 @@ fo = open("data_1.json", "w") #'w' mode will create a new file in the directory
 lines = f.readlines()
 mylist= []
 statelist = [] # list of states in the same order
-ocean_matrix =[[0 for x in range(5)] for x in range(50)] 
+ocean_matrix =[[0 for x in range(5)] for x in range(50)]
+orig =[[0 for x in range(5)] for x in range(50)] #duplicate matrix
+
 mystring = "{"
 count = 0 # to count the number of lines read from the file
 # Step 1: Clean up data by removing spaces between each value
@@ -108,22 +111,27 @@ for l in lines:
 	statelist.append(value[1])
 	# Step 8: Increment the counter to add the next set of values to matrix
 	count+=1 
-
 	
 
 print "StateList is-", statelist
 display(ocean_matrix)
 
+for i in range(0,50):
+	for j in range(0,5):
+		orig[i][j] = ocean_matrix[i][j]
 # Step 9: Normalize the values in range of 0 to 1
 transform(ocean_matrix)
 
 display(ocean_matrix)
 
+print "-------------------------- orig -------------------"
+display(orig)
+
 # Step 10: Convert matrix to JSON and dump
 counter = 0 # to access the state list
 for row in ocean_matrix:
 	state = statelist[counter]
-	json_str = dump(counter+1, state, row)	# Information string
+	json_str = dump(counter+1, state, row, orig)	# Information string
 	mylist.append(json_str) # Add it to a list
 	counter+=1
 

@@ -9,6 +9,7 @@ import json
 	}
 	Converted data stored in data_1.json file in same folder
 	"""
+#Transform Matrix
 
 # Function to format the data in required format
 def dump(a):
@@ -21,27 +22,40 @@ fo = open("data_1.json", "w") #'w' mode will create a new file in the directory
 
 lines = f.readlines()
 mylist= []
+
 mystring = "{"
 
 # Step 1: Clean up data by removing spaces between each value
 for l in lines:
 	
-	tmp1=l.replace(" ","").replace("\n","").split(",")
-	for i in range(2, 6):
+	value=l.replace(" ","").replace("\n","").split(",")
+	for i in range(2, 7):
 		try:
-			tmp1[i] = int(tmp1[i])	#Replace corrupt data of non-integer type to 0
+			value[i] = int(value[i])	#Replace corrupt data of non-integer type to 0
 		except:
-			tmp1[i] = 0;
+			value[i] = 0;
 
-	# Step 2: Apply formula for Openness		
-	tmp2=int(tmp1[2])+int(tmp1[3])+int(tmp1[4])
-	tmp1[7] = tmp2
-	# Step 3: Apply formula for conscientiousness		
-	# Step 2: Apply formula for extraversion		
-	# Step 2: Apply formula for agreeableness	
-	# Step 2: Apply formula for neuroticism		
-	# Step 2: Apply formula for Normalization		
-	json_str = dump(tmp1)	# Information string
+	# Value 1 : GFGid
+	# Value 2 : Location(State)
+	# Values available for computation: 2,3,4,5,6
+	# Step 2: Apply formula for Openness 7th position		
+	tmp2=int(value[2])+int(value[3])+int(value[4])
+	value[7] = tmp2
+	# Step 3: Apply formula for conscientiousness 8th position
+	tmp3 = 2*int(value[2]) + int(value[3])
+	value[8] = tmp3
+	# Step 4: Apply formula for extraversion 9th position	
+	tmp4 = int(value[4])+int(value[5])+int(value[6])
+	value[9] = tmp4
+	# Step 5: Apply formula for agreeableness 10th position	
+	tmp5 = int(value[2])+int(value[4])+int(value[6])
+	value[10] = tmp5
+	# Step 6: Apply formula for neuroticism	11th position
+	tmp6 = 3*int(value[2])	
+	value[11] = tmp6
+	# Step 7: Apply formula for Normalization	
+
+	json_str = dump(value)	# Information string
 	mylist.append(json_str) # Add it to a list
 
 mystring = str(mylist)	# Convert the list of information to a string

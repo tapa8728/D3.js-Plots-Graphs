@@ -23,11 +23,19 @@
     /*.datamaps-legend {
             position: relative;
             top: 710px;
-        }*/
+        }
     #container1 {
           position: relative;
           left: 150px;
-        }
+        }*/
+
+    #conc, #open, #extra, #neuro, #agree {
+        padding: 35px;
+    }
+
+    #open, #extra, #neuro{
+        background-color: #CFD8DC;
+    }
     
 
     </style>
@@ -92,18 +100,12 @@
             </div>
         </div>
     </section>
-
     <!-- Open Content -->
-    <section id = "open">
+    <section id = "open" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Openness Personality Trait</h1>
-                </div>
-            </div>
-            <div class="row">
                 <div>
-                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                    <div id="container1" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
             <!-- /.row -->
@@ -121,7 +123,10 @@
                         highlightFillColor: '#FF6600',
                         highlightOnHover: true,
                         borderColor: '#444',
-                        borderWidth: 1.1
+                        borderWidth: 1.1,
+                        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+                        highlightBorderWidth: 4,
+                        highlightBorderOpacity: 1
                       },
                       dataUrl: 'data_1.json',
                       dataType: 'json',
@@ -144,19 +149,13 @@
                 });
         </script>
     </section>
-    <br><br><br><br>
-
+    
     <!-- Conc Content -->
-    <section id = "conc" style="visibility: hidden">
+    <section id = "conc" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Conscientiousness Personality Trait</h1>
-                </div>
-            </div>
-            <div class="row">
                 <div>
-                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                    <div id="container2" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
             <!-- /.row -->
@@ -166,13 +165,13 @@
                 
                   var map = new Datamap({
                       scope: 'usa',
-                      element: document.getElementById('container1'),
+                      element: document.getElementById('container2'),
                       responsive: true,
                       geographyConfig: {
                           popupTemplate: function(geo, data) {
                           return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
                         },
-                        highlightFillColor: '#FF6600',
+                        highlightFillColor: 'blue',
                         highlightOnHover: true,
                         borderColor: '#444',
                         borderWidth: 1.1
@@ -201,16 +200,11 @@
     </section>
 
     <!-- Extra Content -->
-    <section id = "extra" style="visibility: hidden">
+    <section id = "extra" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Extraversion Personality Trait</h1>
-                </div>
-            </div>
-            <div class="row">
                 <div>
-                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                    <div id="container3" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
             <!-- /.row -->
@@ -220,13 +214,13 @@
                 var p_type;
                   var map = new Datamap({
                       scope: 'usa',
-                      element: document.getElementById('container1'),
+                      element: document.getElementById('container3'),
                       responsive: true,
                       geographyConfig: {
                           popupTemplate: function(geo, data) {
-                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                          return data && data.extraversion && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.extraversion+"</div>";
                         },
-                        highlightFillColor: '#FF6600',
+                        highlightFillColor: 'red',
                         highlightOnHover: true,
                         borderColor: '#444',
                         borderWidth: 1.1
@@ -255,16 +249,11 @@
     </section>
 
     <!-- agree Content -->
-    <section id = "agree" style="visibility: hidden">
+    <section id = "agree">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Agreeableness Personality Trait</h1>
-                </div>
-            </div>
-            <div class="row">
                 <div>
-                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                    <div id="container4" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
             <!-- /.row -->
@@ -274,13 +263,13 @@
                 var p_type;
                   var map = new Datamap({
                       scope: 'usa',
-                      element: document.getElementById('container1'),
+                      element: document.getElementById('container4'),
                       responsive: true,
                       geographyConfig: {
                           popupTemplate: function(geo, data) {
-                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                          return data && data.agreeableness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.agreeableness+"</div>";
                         },
-                        highlightFillColor: '#FF6600',
+                        highlightFillColor: 'green',
                         highlightOnHover: true,
                         borderColor: '#444',
                         borderWidth: 1.1
@@ -308,16 +297,11 @@
     </section>
 
     <!-- neuro Content -->
-    <section id = "neuro" style="visibility: hidden">
+    <section id = "neuro" >
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Neuroticism Personality Trait</h1>
-                </div>
-            </div>
-            <div class="row">
                 <div>
-                    <div id="container1" style="height: 450px; width: 960px"></div> 
+                    <div id="container5" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
             <!-- /.row -->
@@ -326,13 +310,13 @@
         <script>
                 var map = new Datamap({
                   scope: 'usa',
-                  element: document.getElementById('container1'),
+                  element: document.getElementById('container5'),
                   responsive: true,
                   geographyConfig: {
                       popupTemplate: function(geo, data) {
-                      return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                      return data && data.neuroticism && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.neuroticism+"</div>";
                     },
-                    highlightFillColor: '#FF6600',
+                    highlightFillColor: 'pink',
                     highlightOnHover: true,
                     borderColor: '#444',
                     borderWidth: 1.1

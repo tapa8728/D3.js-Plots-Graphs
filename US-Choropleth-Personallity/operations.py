@@ -57,22 +57,44 @@ def color(v):
 
 
 # Function to format the data in required format
-def dump(idk, loc, a, orig):
-	c = idk-1;
-	result = '"'+loc+'" : {"id": '+ str(idk) +', "openness" : '+ str(orig[c][0])+',"fillKey" : "'+color(a[0])+'","conscientiousness" : '+str(orig[c][1])+',"fillKey" : "'+color(a[1])+'","extraversion": '+str(orig[c][2])+',"fillKey" : "'+color(a[2])+'","agreeableness" : '+str(orig[c][3])+',"fillKey" : "'+color(a[3])+'","neuroticism" : '+str(orig[c][4])+',"fillKey" : "'+color(a[4])+'"}'
+def dump_o(id_val, loc, a, orig):
+	c = id_val-1;
+	result = '"'+loc+'" : {"id": '+ str(id_val) +', "openness" : '+ str(orig[c][0])+',"fillKey" : "'+color(a[0])+'"}'
+	return result
+
+def dump_c(id_val, loc, a, orig):
+	c = id_val-1;
+	result = '"'+loc+'" : {"id": '+ str(id_val) +', "conscientiousness" : '+str(orig[c][1])+',"fillKey" : "'+color(a[1])+'"}'
+	return result
+
+def dump_e(id_val, loc, a, orig):
+	c = id_val-1;
+	result = '"'+loc+'" : {"id": '+ str(id_val) +', "extraversion": '+str(orig[c][2])+',"fillKey" : "'+color(a[2])+'"}'
+	return result
+
+def dump_a(id_val, loc, a, orig):
+	c = id_val-1;
+	result = '"'+loc+'" : {"id": '+ str(id_val) +', "agreeableness" : '+str(orig[c][3])+',"fillKey" : "'+color(a[3])+'"}'
+	return result
+
+def dump_n(id_val, loc, a, orig):
+	c = id_val-1;
+	result = '"'+loc+'" : {"id": '+ str(id_val) +', "neuroticism" : '+str(orig[c][4])+',"fillKey" : "'+color(a[4])+'"}'
 	return result
 
 # Raw data in comma-separated format
 f = open("data.txt","r") 	#opens file with name of "data.txt"
-fo = open("data_1.json", "w") #'w' mode will create a new file in the directory
+fo = open("data_o.json", "w") #'w' mode will create a new file in the directory
+fc = open("data_c.json", "w") 
+fe = open("data_e.json", "w") 
+fa = open("data_a.json", "w") 
+fn = open("data_n.json", "w") 
 
 lines = f.readlines()
-mylist= []
 statelist = [] # list of states in the same order
 ocean_matrix =[[0 for x in range(5)] for x in range(50)]
 orig =[[0 for x in range(5)] for x in range(50)] #duplicate matrix
 
-mystring = "{"
 count = 0 # to count the number of lines read from the file
 # Step 1: Clean up data by removing spaces between each value
 for l in lines:
@@ -127,16 +149,66 @@ display(ocean_matrix)
 print "-------------------------- orig -------------------"
 display(orig)
 
-# Step 10: Convert matrix to JSON and dump
+# Step 10: Convert matrix to JSON and dump for openness in data_o.json
 counter = 0 # to access the state list
+o_list = []
+o_string = "{"
 for row in ocean_matrix:
 	state = statelist[counter]
-	json_str = dump(counter+1, state, row, orig)	# Information string
-	mylist.append(json_str) # Add it to a list
+	json_str_o = dump_o(counter+1, state, row, orig)	# Information string
+	o_list.append(json_str_o) # Add it to a list
 	counter+=1
 
+o_string = str(o_list)	# Convert the list of information to a string
+o_json = o_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", o_json
+fo.write(o_json) # Final formatted string stored in data_1.json
+
+"""# Step 11: Convert matrix to JSON and dump for openness in data_o.json
+counter1 = 0 # to access the state list
+for row in ocean_matrix:
+	state = statelist[counter1]
+	json_str_c = dump(counter1+1, state, row, orig)	# Information string
+	mylist.append(json_str_c) # Add it to a list
+	counter1+=1
 mystring = str(mylist)	# Convert the list of information to a string
 blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
 print "Cleaned up list ----> ", blah
 fo.write(blah) # Final formatted string stored in data_1.json
+
+# Step 12: Convert matrix to JSON and dump for openness in data_o.json
+counter2 = 0 # to access the state list
+for row in ocean_matrix:
+	state = statelist[counter2]
+	json_str_e = dump(counter2+1, state, row, orig)	# Information string
+	mylist.append(json_str_e) # Add it to a list
+	counter2+=1
+mystring = str(mylist)	# Convert the list of information to a string
+blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", blah
+fo.write(blah) # Final formatted string stored in data_1.json
+
+# Step 13: Convert matrix to JSON and dump for openness in data_o.json
+counter3 = 0 # to access the state list
+for row in ocean_matrix:
+	state = statelist[counter3]
+	json_str_a = dump(counter3+1, state, row, orig)	# Information string
+	mylist.append(json_str_a) # Add it to a list
+	counter3+=1
+mystring = str(mylist)	# Convert the list of information to a string
+blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", blah
+fo.write(blah) # Final formatted string stored in data_1.json
+
+# Step 10: Convert matrix to JSON and dump for openness in data_o.json
+counter4 = 0 # to access the state list
+for row in ocean_matrix:
+	state = statelist[counter4]
+	json_str_n = dump(counter4+1, state, row, orig)	# Information string
+	mylist.append(json_str_n) # Add it to a list
+	counter4+=1
+mystring = str(mylist)	# Convert the list of information to a string
+blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", blah
+fo.write(blah) # Final formatted string stored in data_1.json """
 

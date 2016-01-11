@@ -164,51 +164,59 @@ o_json = o_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up 
 print "Cleaned up list ----> ", o_json
 fo.write(o_json) # Final formatted string stored in data_1.json
 
-"""# Step 11: Convert matrix to JSON and dump for openness in data_o.json
+# Step 11: Convert matrix to JSON and dump for openness in data_c.json
 counter1 = 0 # to access the state list
+c_list = []
+c_string = "{"
 for row in ocean_matrix:
 	state = statelist[counter1]
-	json_str_c = dump(counter1+1, state, row, orig)	# Information string
-	mylist.append(json_str_c) # Add it to a list
+	json_str_c = dump_c(counter1+1, state, row, orig)	# Information string
+	c_list.append(json_str_c) # Add it to a list
 	counter1+=1
-mystring = str(mylist)	# Convert the list of information to a string
-blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
-print "Cleaned up list ----> ", blah
-fo.write(blah) # Final formatted string stored in data_1.json
+c_string = str(c_list)	# Convert the list of information to a string
+c_json =c_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", c_json
+fc.write(c_json) # Final formatted string stored in data_1.json
 
 # Step 12: Convert matrix to JSON and dump for openness in data_o.json
 counter2 = 0 # to access the state list
+e_list = []
+e_string = "{"
 for row in ocean_matrix:
 	state = statelist[counter2]
-	json_str_e = dump(counter2+1, state, row, orig)	# Information string
-	mylist.append(json_str_e) # Add it to a list
+	json_str_e = dump_e(counter2+1, state, row, orig)	# Information string
+	e_list.append(json_str_e) # Add it to a list
 	counter2+=1
-mystring = str(mylist)	# Convert the list of information to a string
-blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
-print "Cleaned up list ----> ", blah
-fo.write(blah) # Final formatted string stored in data_1.json
+e_string = str(e_list)	# Convert the list of information to a string
+e_json = e_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", e_json
+fe.write(e_json) # Final formatted string stored in data_1.json
 
 # Step 13: Convert matrix to JSON and dump for openness in data_o.json
 counter3 = 0 # to access the state list
+a_list = []
+a_string = "{"
 for row in ocean_matrix:
 	state = statelist[counter3]
-	json_str_a = dump(counter3+1, state, row, orig)	# Information string
-	mylist.append(json_str_a) # Add it to a list
+	json_str_a = dump_a(counter3+1, state, row, orig)	# Information string
+	a_list.append(json_str_a) # Add it to a list
 	counter3+=1
-mystring = str(mylist)	# Convert the list of information to a string
-blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
-print "Cleaned up list ----> ", blah
-fo.write(blah) # Final formatted string stored in data_1.json
+a_string = str(a_list)	# Convert the list of information to a string
+a_json = a_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", a_json
+fa.write(a_json) # Final formatted string stored in data_1.json
 
 # Step 10: Convert matrix to JSON and dump for openness in data_o.json
 counter4 = 0 # to access the state list
+n_list = []
+n_string = "{"
 for row in ocean_matrix:
 	state = statelist[counter4]
-	json_str_n = dump(counter4+1, state, row, orig)	# Information string
-	mylist.append(json_str_n) # Add it to a list
+	json_str_n = dump_n(counter4+1, state, row, orig)	# Information string
+	n_list.append(json_str_n) # Add it to a list
 	counter4+=1
-mystring = str(mylist)	# Convert the list of information to a string
-blah = mystring.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
-print "Cleaned up list ----> ", blah
-fo.write(blah) # Final formatted string stored in data_1.json """
+n_string = str(n_list)	# Convert the list of information to a string
+n_json = n_string.replace("'", "").replace("[","{").replace("]","}")	# Clean up string to suit the format for Datamaps
+print "Cleaned up list ----> ", n_json
+fn.write(n_json) # Final formatted string stored in data_1.json 
 

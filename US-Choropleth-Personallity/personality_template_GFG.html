@@ -34,7 +34,7 @@
     }
 
     #open, #extra, #neuro{
-        background-color: #CFD8DC;
+        background-color: #EEEEEE;
     }
     
 
@@ -94,12 +94,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h1>USA Personality Distribution</h1>
+                    <h1><b>USA Personality Distribution</b></h1>
                     <h4>Hover on map for state-wise information</h4>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- Open Content -->
     <section id = "open" >
         <div class="container">
@@ -120,20 +121,23 @@
                           popupTemplate: function(geo, data) {
                           return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
                         },
-                        highlightFillColor: '#FF6600',
+                        highlightFillColor: '#FF9800',
                         highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 1.1,
-                        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
-                        highlightBorderWidth: 4,
+                        borderColor: '#3E2723',
+                        borderWidth: 1.2,
+                        highlightBorderColor: '#3E2723',
+                        highlightBorderWidth: 2,
                         highlightBorderOpacity: 1
                       },
-                      dataUrl: 'data_1.json',
+                      dataUrl: 'data_o.json',
                       dataType: 'json',
                       data: {},
-                      fills: {
-                        'REP': '#000f1e',   //republic - maize
-                        'DEM': '#667d93',   //democratic - Blue
+                      fills: {  //Shades of Cyan
+                        'LOW': '#26C6DA',   
+                        'LOWMED': '#00ACC1',   
+                        'MED' : '#0097A7',
+                        'HIGHMED' : '#00838F',
+                        'HIGH' : '#006064',
                         defaultFill: 'grey'
                       }
                     }); //end of Datamap variable
@@ -141,10 +145,13 @@
                   //draw a legend for this map
                  map.legend({
                   legendTitle : "Openness Personality Trait",
-                  defaultFillName: "No data",
+                  defaultFillName: "No Data",
                   labels: {
-                    'REP': "Low Value",   //republic - maize
-                    'DEM': "High Value",   //democratic - Blue
+                    'LOW': "0-10",   
+                    'LOWMED': "11-20",   
+                    'MED' : "21-30",
+                    'HIGHMED' : "31-40",
+                    'HIGH' : "41-50"
                   },
                 });
         </script>
@@ -169,19 +176,25 @@
                       responsive: true,
                       geographyConfig: {
                           popupTemplate: function(geo, data) {
-                          return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
+                          return data && data.conscientiousness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.conscientiousness+"</div>";
                         },
-                        highlightFillColor: 'blue',
+                        highlightFillColor: '#FF9800',
                         highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 1.1
+                        borderColor: '#3E2723',
+                        borderWidth: 1.2,
+                        highlightBorderColor: '#3E2723',
+                        highlightBorderWidth: 2,
+                        highlightBorderOpacity: 1
                       },
-                      dataUrl: 'data_1.json',
+                      dataUrl: 'data_c.json',
                       dataType: 'json',
                       data: {},
-                      fills: {
-                        'REP': '#000f1e',   //republic - maize
-                        'DEM': '#667d93',   //democratic - Blue
+                      fills: {  //Shades of Cyan
+                        'LOW': '#F06292',   
+                        'LOWMED': '#E91E63',   
+                        'MED' : '#D81B60',
+                        'HIGHMED' : '#AD1457',
+                        'HIGH' : '#880E4F',
                         defaultFill: 'grey'
                       }
                     }); //end of Datamap variable
@@ -192,8 +205,11 @@
                   legendTitle : "Conscientiousness Personality Trait",
                   defaultFillName: "No data",
                   labels: {
-                    'REP': "Low Value",   //republic - maize
-                    'DEM': "High Value",   //democratic - Blue
+                    'LOW': "0-10",   
+                    'LOWMED': "11-20",   
+                    'MED' : "21-30",
+                    'HIGHMED' : "31-40",
+                    'HIGH' : "41-50"
                   },
                 });
         </script>
@@ -220,17 +236,23 @@
                           popupTemplate: function(geo, data) {
                           return data && data.extraversion && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.extraversion+"</div>";
                         },
-                        highlightFillColor: 'red',
+                        highlightFillColor: '#FF5722',
                         highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 1.1
+                        borderColor: '#3E2723',
+                        borderWidth: 1.2,
+                        highlightBorderColor: '#3E2723',
+                        highlightBorderWidth: 2,
+                        highlightBorderOpacity: 1
                       },
-                      dataUrl: 'data_1.json',
+                      dataUrl: 'data_e.json',
                       dataType: 'json',
                       data: {},
-                      fills: {
-                        'REP': '#000f1e',   //republic - maize
-                        'DEM': '#667d93',   //democratic - Blue
+                      fills: {  //Shades of Cyan
+                        'LOW': '#FFE082',   
+                        'LOWMED': '#FFCA28',   
+                        'MED' : '#FFB300',
+                        'HIGHMED' : '#FF8F00',
+                        'HIGH' : '#FF6F00',
                         defaultFill: 'grey'
                       }
                     }); //end of Datamap variable
@@ -241,8 +263,11 @@
                   legendTitle : "Extraversion Personality Trait",
                   defaultFillName: "No data",
                   labels: {
-                    'REP': "Low Value",   //republic - maize
-                    'DEM': "High Value",   //democratic - Blue
+                    'LOW': "0-10",   
+                    'LOWMED': "11-20",   
+                    'MED' : "21-30",
+                    'HIGHMED' : "31-40",
+                    'HIGH' : "41-50"
                   },
                 });
         </script>
@@ -269,19 +294,25 @@
                           popupTemplate: function(geo, data) {
                           return data && data.agreeableness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.agreeableness+"</div>";
                         },
-                        highlightFillColor: 'green',
+                        highlightFillColor: '#FF9800',
                         highlightOnHover: true,
-                        borderColor: '#444',
-                        borderWidth: 1.1
+                        borderColor: '#3E2723',
+                        borderWidth: 1.2,
+                        highlightBorderColor: '#3E2723',
+                        highlightBorderWidth: 2,
+                        highlightBorderOpacity: 1
                       },
                       dataUrl: 'data_1.json',
                       dataType: 'json',
                       data: {},
-                      fills: {
-                        'REP': '#000f1e',   //republic - maize
-                        'DEM': '#667d93',   //democratic - Blue
+                      fills:{  //Shades of Cyan
+                        'LOW': '#EF9A9A',   
+                        'LOWMED': '#EF5350',   
+                        'MED' : '#FF1744',
+                        'HIGHMED' : '#E53935',
+                        'HIGH' : '#B71C1C',
                         defaultFill: 'grey'
-                      }
+                    }
                     }); //end of Datamap variable
                       
                   //draw a legend for this map
@@ -289,8 +320,11 @@
                   legendTitle : "Agreeableness Personality Trait",
                   defaultFillName: "No data",
                   labels: {
-                    'REP': "Low Value",   //republic - maize
-                    'DEM': "High Value",   //democratic - Blue
+                    'LOW': "0-10",   
+                    'LOWMED': "11-20",   
+                    'MED' : "21-30",
+                    'HIGHMED' : "31-40",
+                    'HIGH' : "41-50"
                   },
                 });
         </script>
@@ -316,19 +350,25 @@
                       popupTemplate: function(geo, data) {
                       return data && data.neuroticism && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.neuroticism+"</div>";
                     },
-                    highlightFillColor: 'pink',
+                    highlightFillColor: '#FF9800',
                     highlightOnHover: true,
-                    borderColor: '#444',
-                    borderWidth: 1.1
+                    borderColor: '#212121',
+                    borderWidth: 1.2,
+                    highlightBorderColor: '#212121',
+                    highlightBorderWidth: 2,
+                    highlightBorderOpacity: 1
                   },
-                  dataUrl: 'data_1.json',
+                  dataUrl: 'data_n.json',
                   dataType: 'json',
                   data: {},
-                  fills: {
-                    'REP': '#000f1e',   //republic - maize
-                    'DEM': '#667d93',   //democratic - Blue
-                    defaultFill: 'grey'
-                  }
+                  fills: {  //Shades of purple
+                        'LOW': '#B39DDB',   
+                        'LOWMED': '#7E57C2',   
+                        'MED' : '#5E35B1',
+                        'HIGHMED' : '#4527A0',
+                        'HIGH' : '#311B92',
+                        defaultFill: 'grey'
+                    }
                 }); //end of Datamap variable
                   
               //draw a legend for this map
@@ -337,9 +377,12 @@
               legendTitle : "Neuroticism Personality Trait",
               defaultFillName: "No data",
               labels: {
-                'REP': "Low Value",   //republic - maize
-                'DEM': "High Value",   //democratic - Blue
-              },
+                    'LOW': "0-10",   
+                    'LOWMED': "11-20",   
+                    'MED' : "21-30",
+                    'HIGHMED' : "31-40",
+                    'HIGH' : "41-50"
+                  },
             });
         </script>
     </section>

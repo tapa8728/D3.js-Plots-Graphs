@@ -20,6 +20,18 @@
         padding-top: 50px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
+    #legend {
+    padding: 1.5em 0 0 1.5em;
+}
+
+li.key {
+    border-top-width: 15px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}
     /*.datamaps-legend {
             position: relative;
             top: 710px;
@@ -39,7 +51,7 @@
     
 
     </style>
-    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
@@ -47,6 +59,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="http://datamaps.github.io/scripts/datamaps.usa.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.js"></script>
 </head>
 
 <body>
@@ -106,7 +120,9 @@
         <div class="container">
             <div class="row">
                 <div>
+                	<center><h1> Openness Personality Trait </h1></center>
                     <div id="container1" class="center-block" style="height: 450px; width: 960px"></div> 
+                    <div class="legendLinear"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -121,11 +137,11 @@
                           popupTemplate: function(geo, data) {
                           return data && data.openness && "<div class='hoverinfo'><strong>"+geo.properties.name+"</strong> : "+data.openness+"</div>";
                         },
-                        highlightFillColor: '#FF9800',
+                        highlightFillColor: '#ffcb05',
                         highlightOnHover: true,
                         borderColor: '#3E2723',
                         borderWidth: 1.2,
-                        highlightBorderColor: '#3E2723',
+                        highlightBorderColor: '#00417f',
                         highlightBorderWidth: 2,
                         highlightBorderOpacity: 1
                       },
@@ -133,17 +149,36 @@
                       dataType: 'json',
                       data: {},
                       fills: {  //Shades of Cyan
-                        'LOW': '#26C6DA',   
-                        'LOWMED': '#00ACC1',   
-                        'MED' : '#0097A7',
-                        'HIGHMED' : '#00838F',
-                        'HIGH' : '#006064',
+                        'LOW': '#7f93a5',   
+                        'LOWMED': '#4c6781',   
+                        'MED' : '#32526f',
+                        'HIGHMED' : '#193c5d',
+                        'HIGH' : '#00274c',
                         defaultFill: 'grey'
                       }
                     }); //end of Datamap variable
                       
                   //draw a legend for this map
-                 map.legend({
+
+                  var linear = d3.scale.linear()
+				  .domain([0,100])
+				  .range(["#7f93a5", "#00274c"]);
+
+				var svg = d3.select("svg");
+
+				svg.append("g")
+				  .attr("class", "legendLinear")
+				  .attr("transform", "translate(20,50)");
+
+				var legendLinear = d3.legend.color()
+				  .shapeWidth(80)
+				  .orient('horizontal')
+				  .scale(linear);
+
+				svg.select(".legendLinear")
+				  .call(legendLinear);
+
+                 /*map.legend({
                   legendTitle : "Openness Personality Trait",
                   defaultFillName: "No Data",
                   labels: {
@@ -153,7 +188,7 @@
                     'HIGHMED' : "31-40",
                     'HIGH' : "41-50"
                   },
-                });
+                }); */
         </script>
     </section>
     
@@ -163,6 +198,7 @@
             <div class="row">
                 <div>
                     <div id="container2" class="center-block" style="height: 450px; width: 960px"></div> 
+                    <div id="legend"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -200,7 +236,23 @@
                     }); //end of Datamap variable
                       
                   //draw a legend for this map
-                 map.legend({
+                var colors = d3.scale.quantize()
+   					 			.range(["#F06292", "#00274c"]);
+				var legend = d3.select('#legend')
+				  .append('ul')
+				    .attr('class', 'list-inline');
+
+				var keys = legend.selectAll('li.key')
+				    .data(colors.range());
+
+				keys.enter().append('li')
+				    .attr('class', 'key')
+				    .style('border-top-color', String)
+				    .text(function(d) {
+				        var r = colors.invertExtent(d);
+				        return (r[0]);
+				    });
+                /* map.legend({
 
                   legendTitle : "Conscientiousness Personality Trait",
                   defaultFillName: "No data",
@@ -211,7 +263,7 @@
                     'HIGHMED' : "31-40",
                     'HIGH' : "41-50"
                   },
-                });
+                });*/
         </script>
     </section>
 

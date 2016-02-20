@@ -62,7 +62,19 @@
 		.append("path")	//we defined path earlier
 		.attr("d", path)
 		.attr("class", "states")
-		.attr("fill", function(d, i) { return colour(i); });
+		.attr("fill", function(d, i) { return colour(i); })
+		.on('mouseover', function(d, i) {
+
+                var currentState = this;
+                d3.select(this).style('fill-opacity', 0.75);
+        })
+        .on('mouseout', function(d, i) {
+
+            d3.selectAll('path')
+                    .style({
+                        'fill-opacity':7
+                    });
+        });
 		/*
 			SVG paths are defined by one attribute, “d”, which dictates how we want to draw a line from one point in our data to another, essentially how we want to shape our data, using a series of commands. 
 			Our “path” variable simplifies things for us. The path variable determines the shape of our data based on the type of geometry object it is. 

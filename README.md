@@ -26,3 +26,10 @@ link - http://tanviparikh.com/portfolios/datamaps/datamap-3.html
 ### Interactive Bar Chart -
 #### Letter Frequency mapping 
 ![Alt text](https://github.com/tapa8728/D3.js-Plots-Graphs/blob/master/screenshots/barchart5.png "Simple Bar 3")
+
+### Wordcloud implementation - 
+##### Twitter timeline tweets
+![alt text](https://github.com/CUBigDataClass/Big-Neuron/blob/Tanvi-branch/Visualizations/WordCloud/my_twitter_wordcloud_4.png "Logo Title Text 1")
+
+##### Twitter timeline tweets
+![alt text](https://github.com/CUBigDataClass/Big-Neuron/blob/Tanvi-branch/Visualizations/WordCloud/my_twitter_wordcloud_5.png "Logo Title Text 1")

@@ -3,11 +3,11 @@ import json
 
 	Required JSON Format- 
 	{
-		"NV": {"extraversion": "0", "neuroticism": "0", "agreeableness": "0", "fillKey": "REP", "conscientiousness": "0", "gfgid": "1001", "openness": "38"}, 
-		"CA": {"extraversion": "0", "neuroticism": "0", "agreeableness": "0", "conscientiousness": "0", "gfgid": "2001", "openness": 56}, 
-		"TX": {"extraversion": "0", "fillKey": "REP", "neuroticism": "0", "fillKey": "REP", "agreeableness": "0", "fillKey": "REP", "conscientiousness": "0", "fillKey": "REP"}
+		"AZ" : {"id": 1, "conscientiousness" : 40,"fillKey" : "LOW"}, 
+		"CO" : {"id": 2, "conscientiousness" : 0,"fillKey" : "LOW"}
 	}
-	Converted data stored in data_1.json file in same folder
+	Saved into data_c.json
+	A JSON file for each personlaity trait will be created
 	"""
 # Print Matrix
 def display(m):
@@ -91,14 +91,14 @@ fa = open("data_a.json", "w")
 fn = open("data_n.json", "w") 
 
 lines = f.readlines()
-statelist = [] # list of states in the same order
-ocean_matrix =[[0 for x in range(5)] for x in range(50)]
-orig =[[0 for x in range(5)] for x in range(50)] #duplicate matrix
+statelist = [] 		# list of states in the same order
+ocean_matrix =[[0 for x in range(5)] for x in range(50)]	#matrix
+orig =[[0 for x in range(5)] for x in range(50)] 			#duplicate matrix
 
-count = 0 # to count the number of lines read from the file
-# Step 1: Clean up data by removing spaces between each value
+count = 0 	# to count the number of lines read from the file
+
 for l in lines:
-	
+	# Step 1: Clean up data by removing spaces between each value
 	value=l.replace(" ","").replace("\n","").split(",")
 	for i in range(2, 7):
 		try:
@@ -106,9 +106,10 @@ for l in lines:
 		except:
 			value[i] = 0;
 
+	""" Nature of data in data.txt
 	# Value 1 : GFGid
 	# Value 2 : Location(State)
-	# Values available for computation: 2,3,4,5,6
+	# Values available for computation: 2,3,4,5,6 """
 	# Step 2: Apply formula for Openness 7th position		
 	tmp1=int(value[2])+int(value[3])+int(value[4])
 	value[7] = tmp1

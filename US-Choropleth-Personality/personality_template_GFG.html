@@ -20,26 +20,37 @@
         padding-top: 50px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
-    #legend {
-    padding: 1.5em 0 0 1.5em;
-}
+    #legend, #legendLinear {
+      padding-top: 50px; 
+      padding-left: 110px;
+      bottom :-40px;
+    /*padding: 1.5em 0 0 1.5em;*/
+    }
 
-li.key {
-    border-top-width: 15px;
-    border-top-style: solid;
-    font-size: .75em;
-    width: 10%;
-    padding-left: 0;
-    padding-right: 0;
-}
-    /*.datamaps-legend {
-            position: relative;
-            top: 710px;
-        }
-    #container1 {
-          position: relative;
-          left: 150px;
-        }*/
+    .legendLinear {
+      position: relative;
+      top : 150px;
+    /*padding: 1.5em 0 0 1.5em;*/
+    }
+    
+
+    li.key {
+        border-top-width: 15px;
+        border-top-style: solid;
+        font-size: .75em;
+        width: 10%;
+        padding-left: 5px;
+        padding-right: 0;
+    }
+
+    li.key2 {
+        border-top-width: 26px;
+        border-top-style: solid;
+        font-size: .75em;
+        width: 5%;
+        padding-left: 5px;
+        padding-right: 0;
+    }
 
     #conc, #open, #extra, #neuro, #agree {
         padding: 35px;
@@ -61,6 +72,7 @@ li.key {
     <script src="js/datamaps.usa.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.8.0/d3-legend.min.js"></script>
 </head>
 
 <body>
@@ -122,7 +134,7 @@ li.key {
                 <div>
                 	<center><h1> Openness Personality Trait </h1></center>
                     <div id="container1" class="center-block" style="height: 450px; width: 960px"></div> 
-                    <div class="legendLinear"></div>
+                    <div class="legendSize"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -160,25 +172,24 @@ li.key {
                       
                   //draw a legend for this map
 
-                  var linear = d3.scale.linear()
-				  .domain([0,100])
-				  .range(["#7f93a5", "#00274c"]);
+                  var linearSize = d3.scale.linear().domain([0,10]).range([10, 30]);
 
-				var svg = d3.select("svg");
+                  var svg = d3.select("svg");
 
-				svg.append("g")
-				  .attr("class", "legendLinear")
-				  .attr("transform", "translate(20,50)");
+                  svg.append("g")
+                    .attr("class", "legendSize")
+                    .attr("transform", "translate(20, 40)");
 
-				var legendLinear = d3.legend.color()
-				  .shapeWidth(80)
-				  .orient('horizontal')
-				  .scale(linear);
+                  var legendSize = d3.legend.size()
+                    .scale(linearSize)
+                    .shape('circle')
+                    .shapePadding(15)
+                    .labelOffset(20)
+                    .orient('horizontal');
 
-				svg.select(".legendLinear")
-				  .call(legendLinear);
-
-                 /*map.legend({
+                  svg.select(".legendSize")
+                    .call(legendSize);
+               /*map.legend({
                   legendTitle : "Openness Personality Trait",
                   defaultFillName: "No Data",
                   labels: {
@@ -197,8 +208,11 @@ li.key {
         <div class="container">
             <div class="row">
                 <div>
-                    <div id="container2" class="center-block" style="height: 450px; width: 960px"></div> 
+                    <center><h1> Conscientiousness Personality Trait </h1></center>
+                    <br>
                     <div id="legend"></div>
+                    <div id="container2" class="center-block" style="height: 450px; width: 960px"></div> 
+                    
                 </div>
             </div>
             <!-- /.row -->
@@ -218,41 +232,42 @@ li.key {
                         highlightOnHover: true,
                         borderColor: '#3E2723',
                         borderWidth: 1.2,
-                        highlightBorderColor: '#3E2723',
+                        highlightBorderColor: '#ff8000',
                         highlightBorderWidth: 2,
                         highlightBorderOpacity: 1
                       },
                       dataUrl: 'data_c.json',
                       dataType: 'json',
                       data: {},
-                      fills: {  //Shades of Cyan
-                        'LOW': '#F06292',   
-                        'LOWMED': '#E91E63',   
-                        'MED' : '#D81B60',
-                        'HIGHMED' : '#AD1457',
-                        'HIGH' : '#880E4F',
+                      fills: {  //Shades of LSA Orange
+                        'LOW': '#e0a366',   
+                        'LOWMED': '#db934c',   
+                        'MED' : '#d68432',
+                        'HIGHMED' : '#d17519',
+                        'HIGH' : '#b75b00',
                         defaultFill: 'grey'
                       }
                     }); //end of Datamap variable
                       
                   //draw a legend for this map
                 var colors = d3.scale.quantize()
-   					 			.range(["#F06292", "#00274c"]);
-				var legend = d3.select('#legend')
-				  .append('ul')
-				    .attr('class', 'list-inline');
+   					 			 .range(["#e0a366","#db934c" , "#d68432","#d17519","#b75b00"]);
+        				var legend = d3.select('#legend')
+        				    .append('ul')
+        				    .attr('class', 'list-inline');
 
-				var keys = legend.selectAll('li.key')
-				    .data(colors.range());
+        				var keys = legend.selectAll('li.key')
+        				    .data(colors.range());
 
-				keys.enter().append('li')
-				    .attr('class', 'key')
-				    .style('border-top-color', String)
-				    .text(function(d) {
-				        var r = colors.invertExtent(d);
-				        return (r[0]);
-				    });
-                /* map.legend({
+        				keys.enter().append('li')
+        				    .attr('class', 'key')
+        				    .style('border-top-color', String)
+                    .style('border-right-color', String)
+        				    .text(function(d) {
+        				        var r = colors.invertExtent(d);
+        				        return r[0]*100+"%";
+        				    });
+                        /* map.legend({
 
                   legendTitle : "Conscientiousness Personality Trait",
                   defaultFillName: "No data",
@@ -272,6 +287,7 @@ li.key {
         <div class="container">
             <div class="row">
                 <div>
+                    <center><h1> Extraversion Personality Trait </h1></center>
                     <div id="container3" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
@@ -299,7 +315,7 @@ li.key {
                       dataUrl: 'data_e.json',
                       dataType: 'json',
                       data: {},
-                      fills: {  //Shades of Cyan
+                      fills: {  //Shades of Maize
                         'LOW': '#FFE082',   
                         'LOWMED': '#FFCA28',   
                         'MED' : '#FFB300',
@@ -312,7 +328,7 @@ li.key {
                   //draw a legend for this map
                  map.legend({
 
-                  legendTitle : "Extraversion Personality Trait",
+                  //legendTitle : "Extraversion Personality Trait",
                   defaultFillName: "No data",
                   labels: {
                     'LOW': "0-10",   
@@ -330,8 +346,10 @@ li.key {
         <div class="container">
             <div class="row">
                 <div>
+                    <center><h1> Agreeableness Personality Trait </h1></center>
+                    <div id="legendLinear"></div>
                     <div id="container4" class="center-block" style="height: 450px; width: 960px"></div> 
-                </div>
+                 </div>
             </div>
             <!-- /.row -->
         </div>
@@ -357,19 +375,34 @@ li.key {
                       dataUrl: 'data_1.json',
                       dataType: 'json',
                       data: {},
-                      fills:{  //Shades of Cyan
-                        'LOW': '#EF9A9A',   
-                        'LOWMED': '#EF5350',   
-                        'MED' : '#FF1744',
-                        'HIGHMED' : '#E53935',
-                        'HIGH' : '#B71C1C',
+                      fills:{  //Shades of Hill Brown
+                        'LOW': '#bc888d',   
+                        'LOWMED': '#a15960',   
+                        'MED' : '#944149',
+                        'HIGHMED' : '#872932',
+                        'HIGH' : '#610e16',
                         defaultFill: 'grey'
                     }
                     }); //end of Datamap variable
                       
                   //draw a legend for this map
-                 map.legend({
-                  legendTitle : "Agreeableness Personality Trait",
+                  var colors = d3.scale.quantize()
+                   .range(["#bc888d","#a15960" , "#944149","#872932","#610e16"]);
+                var legend = d3.select('#legendLinear')
+                    .append('ul')
+                    .attr('class', 'list-inline');
+
+                var keys = legend.selectAll('li.key2')
+                    .data(colors.range());
+
+                keys.enter().append('li')
+                    .attr('class', 'key2')
+                    .style('border-top-color', String)
+                    .text(function(d) {
+                        var r = colors.invertExtent(d);
+                        return r[0]*100+"%";
+                    });
+                  /*legendTitle : "Agreeableness Personality Trait",
                   defaultFillName: "No data",
                   labels: {
                     'LOW': "0-10",   
@@ -378,7 +411,7 @@ li.key {
                     'HIGHMED' : "31-40",
                     'HIGH' : "41-50"
                   },
-                });
+                });*/
         </script>
     </section>
 
@@ -387,6 +420,7 @@ li.key {
         <div class="container">
             <div class="row">
                 <div>
+                    <center><h1> Neuroticism Personality Trait </h1></center>
                     <div id="container5" class="center-block" style="height: 450px; width: 960px"></div> 
                 </div>
             </div>
@@ -426,7 +460,7 @@ li.key {
               //draw a legend for this map
              map.legend({
 
-              legendTitle : "Neuroticism Personality Trait",
+              //legendTitle : " Personality Trait",
               defaultFillName: "No data",
               labels: {
                     'LOW': "0-10",   
